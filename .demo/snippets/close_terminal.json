@@ -1,0 +1,6 @@
+[
+    {
+        "action": "closeTerminal",
+        "terminalId": "{TERMINAL_ID}"
+    }
+]

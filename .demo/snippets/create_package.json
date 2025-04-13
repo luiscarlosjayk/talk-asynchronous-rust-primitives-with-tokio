@@ -1,0 +1,7 @@
+[
+    {
+        "action": "executeTerminalCommand",
+        "terminalId": "create_package",
+        "command": "cd src/examples && cargo new {FOLDER_NAME} --name {PACKAGE_NAME}"
+    }
+]
