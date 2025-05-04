@@ -1,0 +1,42 @@
+Index: /src/examples/6_notify_demo/src/main.rs
+===================================================================
+--- /src/examples/6_notify_demo/src/main.rs
++++ /src/examples/6_notify_demo/src/main.rs
+@@ -1,3 +1,35 @@
+-fn main() {
+-    println!("Hello, world!");
++use std::sync::Arc;
++use tokio::sync::Notify;
++use tokio::time::{Duration, Instant, sleep};
++
++async fn notifier(notify: Arc<Notify>) {
++    let start = Instant::now();
++    println!("Preparing to notify...");
++    sleep(Duration::from_secs(2)).await;
++    notify.notify_one();
++    println!(
++        "Notification sent!\nTook {:?}ms",
++        start.elapsed().as_millis()
++    );
+ }
++
++async fn waiter(notify: Arc<Notify>) {
++    let start = Instant::now();
++    println!("Waiting for notification...");
++    notify.notified().await;
++    println!(
++        "Notification received!\nTook {:?}ms",
++        start.elapsed().as_millis()
++    );
++}
++
++#[tokio::main]
++async fn main() {
++    let notify = Arc::new(Notify::new());
++
++    let notifier_handle = tokio::spawn(notifier(notify.clone()));
++    let waiter_handle = tokio::spawn(waiter(notify.clone()));
++
++    notifier_handle.await.unwrap();
++    waiter_handle.await.unwrap();
++}

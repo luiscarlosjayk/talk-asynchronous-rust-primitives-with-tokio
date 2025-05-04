@@ -1,8 +1,8 @@
 ---
-theme: default
+theme: minimal
 layout: intro
 ---
 
-# Asyncrhonous Primitives with Tokio
+# Asynchronous Fun with Tokio
 
 &mdash; by Luis Carlos Osorio Jayk

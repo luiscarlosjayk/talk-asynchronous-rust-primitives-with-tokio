@@ -1,0 +1,130 @@
+use std::sync::{Arc, Mutex};
+use tokio::{
+    fs::File,
+    io::AsyncWriteExt,
+    sync::mpsc,
+    time::{Duration, Instant, sleep},
+};
+
+#[derive(Debug, Clone)]
+struct LogMessage {
+    task_name: String,
+    message: String,
+}
+
+const FILE_PATH: &str = "foo.txt";
+
+#[derive(Debug, Default)]
+struct SyncShared {
+    entries: Mutex<Vec<LogMessage>>,
+}
+
+impl SyncShared {
+    fn new() -> Self {
+        Self {
+            entries: Mutex::new(Vec::new()),
+        }
+    }
+
+    fn add_entry(&self, log_message: LogMessage) {
+        let mut lock_guard = self.entries.lock().unwrap();
+        lock_guard.push(log_message);
+    }
+
+    fn get_entries(&self) -> Vec<LogMessage> {
+        let lock_guard = self.entries.lock().unwrap();
+        lock_guard.clone()
+    }
+}
+
+#[tokio::main]
+async fn main() {
+    let start_time = Arc::new(Instant::now());
+    let _create_and_truncate = File::options()
+        .create(true)
+        .write(true)
+        .truncate(true)
+        .open(FILE_PATH)
+        .await
+        .unwrap();
+    let (sender, mut receiver) = mpsc::channel::<LogMessage>(10);
+    let shared = Arc::new(SyncShared::new());
+
+    let file_writer_task = tokio::spawn(async move {
+        let mut file = File::options().append(true).open(FILE_PATH).await.unwrap();
+
+        while let Some(log_message) = receiver.recv().await {
+            println!(
+                "Log writer task received message: {} from task: {}",
+                log_message.message, log_message.task_name
+            );
+            file.write_all(log_message.message.as_bytes())
+                .await
+                .unwrap();
+        }
+        println!("Log writer task shutting down.");
+    });
+
+    let task_1 = tokio::spawn({
+        let start_time = start_time.clone();
+        let log_message = LogMessage {
+            task_name: "task_1".to_string(),
+            message: "Task 1 was here!\n".to_string(),
+        };
+        let sender = sender.clone();
+        let shared = shared.clone();
+
+        async move {
+            println!("Starting task_1 at {}µs", start_time.elapsed().as_micros());
+            sleep(Duration::from_millis(400)).await;
+
+            shared.add_entry(log_message.clone());
+
+            println!(
+                "Task_1 sending message: {} to log writer task",
+                log_message.message
+            );
+            sender.send(log_message).await.unwrap();
+            println!("[task_1] Took {}ms", start_time.elapsed().as_millis());
+        }
+    });
+
+    let task_2 = tokio::spawn({
+        let start_time = start_time.clone();
+        let log_message = LogMessage {
+            task_name: "task_2".to_string(),
+            message: "Task 2 was here!\n".to_string(),
+        };
+        let sender = sender.clone();
+        let shared = shared.clone();
+
+        async move {
+            println!("Starting task_2 at {}µs", start_time.elapsed().as_micros());
+            sleep(Duration::from_millis(100)).await;
+
+            shared.add_entry(log_message.clone());
+
+            println!(
+                "Task_2 sending message: {} to log writer task",
+                log_message.message
+            );
+            sender.send(log_message).await.unwrap();
+
+            println!("[task_2] Took {}ms", start_time.elapsed().as_millis());
+        }
+    });
+
+    let _ = task_1.await;
+    let _ = task_2.await;
+
+    drop(sender);
+    file_writer_task.await.unwrap();
+
+    println!("All tasks completed.");
+
+    let entries = shared.get_entries();
+    println!("Entries:");
+    for entry in entries {
+        println!("{}", entry.message);
+    }
+}

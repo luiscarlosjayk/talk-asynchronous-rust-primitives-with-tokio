@@ -1,0 +1,115 @@
+{
+  "$schema": "https://demotime.elio.dev/demo-time.schema.json",
+  "title": "2. [CONTENT] Asynchronous Programming 101",
+  "description": "This contains initial slides.",
+  "demos": [
+    {
+      "title": "ASYNC::Slide 1",
+      "steps": [
+        {
+          "action": "openSlide",
+          "path": "/.demo/slides/2_asynchronous_101/slide1.md"
+        }
+      ]
+    },
+    {
+      "title": "ASYNC::Slide 2",
+      "steps": [
+        {
+          "action": "markdownPreview",
+          "path": "/.demo/slides/2_asynchronous_101/slide2.md"
+        }
+      ]
+    },
+    {
+      "title": "ASYNC::Slide 3",
+      "steps": [
+        {
+          "action": "markdownPreview",
+          "path": "/.demo/slides/2_asynchronous_101/slide3.md"
+        }
+      ]
+    },
+    {
+      "title": "ASYNC::Slide 4",
+      "steps": [
+        {
+          "action": "markdownPreview",
+          "path": "/.demo/slides/2_asynchronous_101/slide4.md"
+        }
+      ]
+    },
+    {
+      "title": "ASYNC::Slide 5",
+      "steps": [
+        {
+          "action": "markdownPreview",
+          "path": "/.demo/slides/2_asynchronous_101/slide5.md"
+        }
+      ]
+    },
+    {
+      "title": "ASYNC::Slide 6",
+      "steps": [
+        {
+          "action": "markdownPreview",
+          "path": "/.demo/slides/2_asynchronous_101/slide6.md"
+        }
+      ]
+    },
+    {
+      "title": "ASYNC::Slide 7",
+      "steps": [
+        {
+          "action": "markdownPreview",
+          "path": "/.demo/slides/2_asynchronous_101/slide7.md"
+        }
+      ]
+    },
+    {
+      "title": "ASYNC::Slide 8",
+      "steps": [
+        {
+          "action": "markdownPreview",
+          "path": "/.demo/slides/2_asynchronous_101/slide8.md"
+        }
+      ]
+    },
+    {
+      "title": "ASYNC::Slide 9",
+      "steps": [
+        {
+          "action": "markdownPreview",
+          "path": "/.demo/slides/2_asynchronous_101/slide9.md"
+        }
+      ]
+    },
+    {
+      "title": "ASYNC::Slide 10",
+      "steps": [
+        {
+          "action": "markdownPreview",
+          "path": "/.demo/slides/2_asynchronous_101/slide10.md"
+        }
+      ]
+    },
+    {
+      "title": "ASYNC::Slide 11",
+      "steps": [
+        {
+          "action": "markdownPreview",
+          "path": "/.demo/slides/2_asynchronous_101/slide11.md"
+        }
+      ]
+    },
+    {
+      "title": "ASYNC::Slide 12",
+      "steps": [
+        {
+          "action": "markdownPreview",
+          "path": "/.demo/slides/2_asynchronous_101/slide12.md"
+        }
+      ]
+    }
+  ]
+}
