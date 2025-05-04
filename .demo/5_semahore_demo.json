@@ -1,0 +1,81 @@
+{
+  "$schema": "https://demotime.elio.dev/demo-time.schema.json",
+  "title": "5.[DEMO] Semaphore Demo",
+  "description": "This demoes how to use Semaphore in Rust programming language.",
+  "demos": [
+    {
+      "title": "SEMAPHORE_DEMO::Slide 1",
+      "steps": [
+        {
+          "action": "openSlide",
+          "path": "/.demo/slides/4_mutex/slide1.md"
+        }
+      ]
+    },
+    {
+      "title": "SEMAPHORE_DEMO::Initialize package",
+      "steps": [
+        {
+          "action": "snippet",
+          "contentPath": "./snippets/create_package.json",
+          "args": {
+            "PACKAGE_NAME": "semaphore_demo",
+            "FOLDER_NAME": "5_semaphore_demo"
+          }
+        }
+      ]
+    },
+    {
+      "title": "SEMAPHORE_DEMO::Install tokio",
+      "steps": [
+        {
+          "action": "closeTerminal",
+          "terminalId": "create_package"
+        },
+        {
+          "action": "executeTerminalCommand",
+          "terminalId": "semaphore_demo",
+          "command": "cd src/examples/5_semaphore_demo && cargo add tokio --features full"
+        },
+        {
+          "action": "open",
+          "path": "/src/examples/5_semaphore_demo/Cargo.toml"
+        },
+        {
+          "action": "create",
+          "path": "/src/examples/5_semaphore_demo/src/main.rs",
+          "contentPath": "/snapshots/semaphore_demo.snapshot.rs"
+        }
+      ]
+    },
+    {
+      "title": "SEMAPHORE_DEMO::Open slide2",
+      "steps": [
+        {
+          "action": "openSlide",
+          "path": "/.demo/slides/5_semaphore/slide2.md"
+        }
+      ]
+    },
+    {
+      "title": "SEMAPHORE_DEMO::Write initial example code",
+      "steps": [
+        {
+          "action": "open",
+          "path": "/src/examples/5_semaphore_demo/src/main.rs"
+        },
+        {
+          "action": "applyPatch",
+          "path": "/src/examples/5_semaphore_demo/src/main.rs",
+          "contentPath": "/snapshots/semaphore_demo.snapshot.rs",
+          "patch": "/patches/semaphore_demo/step1.patch"
+        },
+        {
+          "action": "executeTerminalCommand",
+          "terminalId": "semaphore_demo",
+          "command": "clear && cargo run"
+        }
+      ]
+    }
+  ]
+}

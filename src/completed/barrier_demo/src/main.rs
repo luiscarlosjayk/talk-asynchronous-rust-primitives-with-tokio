@@ -1,0 +1,48 @@
+use std::sync::Arc;
+use tokio::{
+    sync::Barrier,
+    task::spawn,
+    time::{Duration, Instant, sleep},
+};
+
+#[tokio::main]
+async fn main() {
+    let barrier = Arc::new(Barrier::new(2));
+
+    let start_time = Instant::now();
+    let task_1 = spawn(sleep_a_while(
+        Duration::from_millis(1),
+        barrier.clone(),
+        "task_1",
+    ));
+    let task_2 = spawn(sleep_a_while(
+        Duration::from_millis(200),
+        barrier.clone(),
+        "task_2",
+    ));
+    let task_3 = spawn(sleep_a_while(
+        Duration::from_millis(300),
+        barrier.clone(),
+        "task_3",
+    ));
+    let task_4 = spawn(sleep_a_while(
+        Duration::from_millis(400),
+        barrier.clone(),
+        "task_4",
+    ));
+    let _ = tokio::join!(task_1, task_2, task_3, task_4);
+    println!("Took overall {}ms", start_time.elapsed().as_millis());
+}
+
+async fn sleep_a_while(duration: Duration, barrier: Arc<Barrier>, label: &str) {
+    let start_time = Instant::now();
+    println!("Starting task: {}", label);
+    sleep(duration).await;
+    let barrier_wait_result = barrier.wait().await;
+    println!(
+        "[{}] took: {}ms and is leader?: {}",
+        label,
+        start_time.elapsed().as_millis(),
+        barrier_wait_result.is_leader()
+    );
+}

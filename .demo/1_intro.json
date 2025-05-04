@@ -11,6 +11,24 @@
             "path": "/.demo/slides/1_intro/slide1.md"
           }
         ]
+      },
+      {
+        "title": "INTRO::Slide 2",
+        "steps": [
+          {
+            "action": "openSlide",
+            "path": "/.demo/slides/1_intro/slide2.md"
+          }
+        ]
+      },
+      {
+        "title": "INTRO::Slide 3",
+        "steps": [
+          {
+            "action": "openSlide",
+            "path": "/.demo/slides/1_intro/slide3.md"
+          }
+        ]
       }
     ]
 }

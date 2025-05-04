@@ -1,0 +1,370 @@
+{
+  "$schema": "https://demotime.elio.dev/demo-time.schema.json",
+  "title": "3.[DEMO] Tokio Demo",
+  "description": "This demoes how to build some asynchronous primitives with Tokio for Rust programming language.",
+  "demos": [
+    {
+      "title": "TOKIO_DEMO::Slide 1",
+      "steps": [
+        {
+          "action": "openSlide",
+          "path": "/.demo/slides/3_tokio_intro/slide1.md"
+        }
+      ]
+    },
+    {
+      "title": "TOKIO_DEMO::Create package",
+      "steps": [
+        {
+          "action": "snippet",
+          "contentPath": "./snippets/create_package.json",
+          "args": {
+            "PACKAGE_NAME": "tokio_demo",
+            "FOLDER_NAME": "3_tokio_demo"
+          }
+        }
+      ]
+    },
+    {
+      "title": "TOKIO_DEMO::Install tokio",
+      "steps": [
+        {
+          "action": "closeTerminal",
+          "terminalId": "create_package"
+        },
+        {
+          "action": "executeTerminalCommand",
+          "terminalId": "tokio_demo",
+          "command": "cd src/examples/3_tokio_demo && cargo add tokio --features full"
+        },
+        {
+          "action": "open",
+          "path": "/src/examples/3_tokio_demo/Cargo.toml"
+        }
+      ]
+    },
+    {
+      "title": "TOKIO_DEMO::Open package main.rs",
+      "steps": [
+        {
+          "action": "closeTerminal",
+          "terminalId": "tokio_demo"
+        },
+        {
+          "action": "open",
+          "path": "/src/examples/3_tokio_demo/src/main.rs"
+        }
+      ]
+    },
+    {
+      "title": "TOKIO_DEMO::Add async main",
+      "steps": [
+        {
+          "action": "open",
+          "path": "/src/examples/3_tokio_demo/src/main.rs"
+        },
+        {
+          "action": "replace",
+          "path": "/src/examples/3_tokio_demo/src/main.rs",
+          "contentPath": "content/tokio_demo/async_main.rs",
+          "position": "1:4",
+          "lineInsertionDelay": 200
+        }
+      ]
+    },
+    {
+      "title": "TOKIO_DEMO::Add async say_world",
+      "description": "Adds an async function that prints 'world'.",
+      "steps": [
+        {
+          "action": "replace",
+          "path": "/src/examples/3_tokio_demo/src/main.rs",
+          "contentPath": "content/tokio_demo/async_world.rs",
+          "position": "1:5",
+          "lineInsertionDelay": 200
+        },
+        {
+          "action": "open",
+          "path": "/src/examples/3_tokio_demo/src/main.rs"
+        }
+      ]
+    },
+    {
+      "title": "TOKIO_DEMO::Slide 2 and execute package",
+      "steps": [
+        {
+          "action": "openSlide",
+          "path": "/.demo/slides/3_tokio_intro/slide2.md"
+        },
+        {
+          "action": "executeTerminalCommand",
+          "terminalId": "tokio_demo",
+          "command": "cd src/examples/3_tokio_demo && clear && cargo run"
+        }
+      ]
+    },
+    {
+      "title": "TOKIO_DEMO::Tokio task slide",
+      "steps": [
+        {
+          "action": "closeTerminal",
+          "terminalId": "run_tokio_demo"
+        },
+        {
+          "action": "openSlide",
+          "path": "/.demo/slides/3_tokio_intro/slide5.md"
+        }
+      ]
+    },
+    {
+      "title": "TOKIO_DEMO::Tokio call say_world within a task",
+      "steps": [
+        {
+          "action": "replace",
+          "path": "/src/examples/3_tokio_demo/src/main.rs",
+          "contentPath": "content/tokio_demo/spawn_task.rs",
+          "position": "13:14",
+          "lineInsertionDelay": 200
+        }
+      ]
+    },
+    {
+      "title": "TOKIO_DEMO::Add reqwest crate",
+      "description": "Adds the reqwest crate to the project.",
+      "steps": [
+        {
+          "action": "openSlide",
+          "path": "/.demo/slides/3_tokio_intro/slide1.md"
+        },
+        {
+          "action": "executeTerminalCommand",
+          "terminalId": "tokio_demo",
+          "command": "clear && cargo add reqwest"
+        },
+        {
+          "action": "open",
+          "path": "/src/examples/3_tokio_demo/Cargo.toml"
+        }
+      ]
+    },
+    {
+      "title": "TOKIO_DEMO::Add get_status function",
+      "description": "Adds a function that gets the status of a website.",
+      "steps": [
+        {
+          "action": "replace",
+          "path": "/src/examples/3_tokio_demo/src/main.rs",
+          "contentPath": "content/tokio_demo/get_status.rs",
+          "position": "1:16",
+          "lineInsertionDelay": 200
+        }
+      ]
+    },
+    {
+      "title": "TOKIO_DEMO::Execute serial asynchronous main",
+      "steps": [
+        {
+          "action": "executeTerminalCommand",
+          "terminalId": "tokio_demo",
+          "command": "clear && cargo run"
+        }
+      ]
+    },
+    {
+      "title": "TOKIO_DEMO::Tokio join slide",
+      "steps": [
+        {
+          "action": "openSlide",
+          "path": "/.demo/slides/3_tokio_intro/slide4.md"
+        }
+      ]
+    },
+    {
+      "title": "TOKIO_DEMO::Adds Tokio::join macro",
+      "steps": [
+        {
+          "action": "replace",
+          "path": "/src/examples/3_tokio_demo/src/main.rs",
+          "contentPath": "content/tokio_demo/main_with_join.rs",
+          "position": "4:15",
+          "lineInsertionDelay": 200
+        },
+        {
+          "action": "executeTerminalCommand",
+          "terminalId": "tokio_demo",
+          "command": "clear && cargo run"
+        }
+      ]
+    },
+    {
+      "title": "TOKIO_DEMO::Adds Adds heartbeat function",
+      "steps": [
+        {
+          "action": "replace",
+          "path": "/src/examples/3_tokio_demo/src/main.rs",
+          "content": "use std::time::{Duration, Instant};",
+          "position": "1",
+          "lineInsertionDelay": 200
+        },
+        {
+          "action": "insert",
+          "path": "/src/examples/3_tokio_demo/src/main.rs",
+          "contentPath": "content/tokio_demo/heartbeat.rs",
+          "position": "26",
+          "lineInsertionDelay": 200
+        },
+        {
+          "action": "replace",
+          "path": "/src/examples/3_tokio_demo/src/main.rs",
+          "contentPath": "content/tokio_demo/invoke_heartbeat.rs",
+          "position": "5",
+          "lineInsertionDelay": 200
+        },
+        {
+          "action": "executeTerminalCommand",
+          "terminalId": "tokio_demo",
+          "command": "clear && cargo run"
+        }
+      ]
+    },
+    {
+      "title": "TOKIO_DEMO::Tokio select slide",
+      "steps": [
+        {
+          "action": "closeTerminal",
+          "terminalId": "run_tokio_demo"
+        },
+        {
+          "action": "openSlide",
+          "path": "/.demo/slides/3_tokio_intro/slide6.md"
+        }
+      ]
+    },
+    {
+      "title": "TOKIO_DEMO::Adds tokio::select macro",
+      "steps": [
+        {
+          "action": "replace",
+          "path": "/src/examples/3_tokio_demo/src/main.rs",
+          "contentPath": "content/tokio_demo/tokio_select.rs",
+          "position": "7:12",
+          "lineInsertionDelay": 200
+        },
+        {
+          "action": "executeTerminalCommand",
+          "terminalId": "tokio_demo",
+          "command": "clear && cargo run"
+        }
+      ]
+    },
+    {
+      "title": "TOKIO_DEMO::Adds blocking call",
+      "steps": [
+        {
+          "action": "insert",
+          "path": "/src/examples/3_tokio_demo/src/main.rs",
+          "contentPath": "content/tokio_demo/blocking_call.rs",
+          "position": "32",
+          "lineInsertionDelay": 200
+        },
+        {
+          "action": "replace",
+          "path": "/src/examples/3_tokio_demo/src/main.rs",
+          "contentPath": "content/tokio_demo/blocking_select.rs",
+          "position": "7:10",
+          "lineInsertionDelay": 200
+        }
+      ]
+    },
+    {
+      "title": "TOKIO_DEMO::Executes bad blocking example",
+      "steps": [
+        {
+          "action": "executeTerminalCommand",
+          "terminalId": "tokio_demo",
+          "command": "clear && cargo run"
+        }
+      ]
+    },
+    {
+      "title": "TOKIO_DEMO::Bad blocking join example",
+      "steps": [
+        {
+          "action": "replace",
+          "path": "/src/examples/3_tokio_demo/src/main.rs",
+          "contentPath": "content/tokio_demo/blocking_join.rs",
+          "position": "7:14",
+          "lineInsertionDelay": 200
+        }
+      ]
+    },
+    {
+      "title": "TOKIO_DEMO::Executes bad blocking join example",
+      "steps": [
+        {
+          "action": "executeTerminalCommand",
+          "terminalId": "tokio_demo",
+          "command": "clear && cargo run"
+        }
+      ]
+    },
+    {
+      "title": "TOKIO_DEMO::Adds good blocking example",
+      "steps": [
+        {
+          "action": "replace",
+          "path": "/src/examples/3_tokio_demo/src/main.rs",
+          "contentPath": "content/tokio_demo/good_blocking_main.rs",
+          "position": "4:20",
+          "lineInsertionDelay": 200
+        }
+      ]
+    },
+    {
+      "title": "TOKIO_DEMO::Executes good blocking example",
+      "steps": [
+        {
+          "action": "executeTerminalCommand",
+          "terminalId": "tokio_demo",
+          "command": "clear && cargo run"
+        }
+      ]
+    },
+    {
+      "title": "TOKIO_DEMO::Adds better good blocking example",
+      "steps": [
+        {
+          "action": "replace",
+          "path": "/src/examples/3_tokio_demo/src/main.rs",
+          "contentPath": "content/tokio_demo/better_good_blocking_main.rs",
+          "position": "4:20",
+          "lineInsertionDelay": 200
+        }
+      ]
+    },
+    {
+      "title": "TOKIO_DEMO::Executes better good blocking example",
+      "steps": [
+        {
+          "action": "executeTerminalCommand",
+          "terminalId": "tokio_demo",
+          "command": "clear && cargo run"
+        }
+      ]
+    },
+    {
+      "title": "TOKIO_DEMO::Cleanup",
+      "steps": [
+        {
+          "action": "executeTerminalCommand",
+          "terminalId": "tokio_demo",
+          "command": "cd .. && rm -rf 3_tokio_demo"
+        },
+        {
+          "action": "closeTerminal",
+          "terminalId": "run_tokio_demo"
+        }
+      ]
+    }
+  ]
+}

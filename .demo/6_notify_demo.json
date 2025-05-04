@@ -1,0 +1,110 @@
+{
+  "$schema": "https://demotime.elio.dev/demo-time.schema.json",
+  "title": "6.[DEMO] Notify Demo",
+  "description": "This demoes how to use Notify in Rust programming language.",
+  "demos": [
+    {
+      "title": "NOTIFY_DEMO::Slide 1",
+      "steps": [
+        {
+          "action": "openSlide",
+          "path": "/.demo/slides/6_notify/slide1.md"
+        }
+      ]
+    },
+    {
+      "title": "NOTIFY_DEMO::Initialize package",
+      "steps": [
+        {
+          "action": "snippet",
+          "contentPath": "./snippets/create_package.json",
+          "args": {
+            "PACKAGE_NAME": "notify_demo",
+            "FOLDER_NAME": "6_notify_demo"
+          }
+        }
+      ]
+    },
+    {
+      "title": "NOTIFY_DEMO::Install tokio",
+      "steps": [
+        {
+          "action": "closeTerminal",
+          "terminalId": "create_package"
+        },
+        {
+          "action": "executeTerminalCommand",
+          "terminalId": "notify_demo",
+          "command": "cd src/examples/6_notify_demo && cargo add tokio --features full"
+        },
+        {
+          "action": "open",
+          "path": "/src/examples/6_notify_demo/Cargo.toml"
+        },
+        {
+          "action": "create",
+          "path": "/src/examples/6_notify_demo/src/main.rs",
+          "contentPath": "/snapshots/notify_demo.snapshot.rs"
+        }
+      ]
+    },
+    {
+      "title": "NOTIFY_DEMO::Open slide2",
+      "steps": [
+        {
+          "action": "openSlide",
+          "path": "/.demo/slides/6_notify/slide2.md"
+        }
+      ]
+    },
+    {
+      "title": "NOTIFY_DEMO::Write initial example code",
+      "steps": [
+        {
+          "action": "open",
+          "path": "/src/examples/6_notify_demo/src/main.rs"
+        },
+        {
+          "action": "applyPatch",
+          "path": "/src/examples/6_notify_demo/src/main.rs",
+          "contentPath": "/snapshots/notify_demo.snapshot.rs",
+          "patch": "/patches/notify_demo/step1.patch"
+        },
+        {
+          "action": "executeTerminalCommand",
+          "terminalId": "notify_demo",
+          "command": "clear && cargo run"
+        }
+      ]
+    },
+    {
+      "title": "NOTIFY_DEMO::Open slide3",
+      "steps": [
+        {
+          "action": "openSlide",
+          "path": "/.demo/slides/6_notify/slide3.md"
+        }
+      ]
+    },
+    {
+      "title": "NOTIFY_DEMO::Adds health check example",
+      "steps": [
+        {
+          "action": "open",
+          "path": "/src/examples/6_notify_demo/src/main.rs"
+        },
+        {
+          "action": "applyPatch",
+          "path": "/src/examples/6_notify_demo/src/main.rs",
+          "contentPath": "/snapshots/notify_demo.snapshot.rs",
+          "patch": "/patches/notify_demo/step2.patch"
+        },
+        {
+          "action": "executeTerminalCommand",
+          "terminalId": "notify_demo",
+          "command": "clear && cargo run"
+        }
+      ]
+    }
+  ]
+}
