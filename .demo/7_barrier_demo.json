@@ -1,0 +1,90 @@
+{
+  "$schema": "https://demotime.elio.dev/demo-time.schema.json",
+  "title": "7.[DEMO] Barrier Demo",
+  "description": "This demoes how to use Barrier in Rust programming language.",
+  "demos": [
+    {
+      "title": "BARRIER_DEMO::Slide 1",
+      "steps": [
+        {
+          "action": "openSlide",
+          "path": "/.demo/slides/7_barrier/slide1.md"
+        }
+      ]
+    },
+    {
+      "title": "BARRIER_DEMO::Initialize package",
+      "steps": [
+        {
+          "action": "snippet",
+          "contentPath": "./snippets/create_package.json",
+          "args": {
+            "PACKAGE_NAME": "barrier_demo",
+            "FOLDER_NAME": "7_barrier_demo"
+          }
+        }
+      ]
+    },
+    {
+      "title": "BARRIER_DEMO::Install tokio",
+      "steps": [
+        {
+          "action": "closeTerminal",
+          "terminalId": "create_package"
+        },
+        {
+          "action": "executeTerminalCommand",
+          "terminalId": "BARRIER_DEMO",
+          "command": "cd src/examples/7_BARRIER_DEMO && cargo add tokio --features full"
+        },
+        {
+          "action": "open",
+          "path": "/src/examples/7_BARRIER_DEMO/Cargo.toml"
+        },
+        {
+          "action": "create",
+          "path": "/src/examples/7_barrier_demo/src/main.rs",
+          "contentPath": "/snapshots/barrier_demo.snapshot.rs"
+        }
+      ]
+    },
+    {
+      "title": "BARRIER_DEMO::Open slide2",
+      "steps": [
+        {
+          "action": "openSlide",
+          "path": "/.demo/slides/7_barrier/slide2.md"
+        }
+      ]
+    },
+    {
+      "title": "BARRIER_DEMO::Write initial example code",
+      "steps": [
+        {
+          "action": "open",
+          "path": "/src/examples/7_barrier_demo/src/main.rs"
+        },
+        {
+          "action": "applyPatch",
+          "path": "/src/examples/7_barrier_demo/src/main.rs",
+          "contentPath": "/snapshots/barrier_demo.snapshot.rs",
+          "patch": "/patches/barrier_demo/step1.patch"
+        },
+        {
+          "action": "executeTerminalCommand",
+          "terminalId": "BARRIER_DEMO",
+          "command": "clear && cargo run"
+        }
+      ]
+    },
+    {
+      "title": "BARRIER_DEMO::Open slide3",
+      "steps": [
+        {
+          "action": "openSlide",
+          "path": "/.demo/slides/7_barrier/slide3.md"
+        }
+      ]
+    }
+  ]
+}
