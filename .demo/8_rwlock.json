@@ -1,0 +1,90 @@
+{
+  "$schema": "https://demotime.elio.dev/demo-time.schema.json",
+  "title": "8.[DEMO] RwLock Demo",
+  "description": "This demoes how to use RwLock in Rust programming language.",
+  "demos": [
+    {
+      "title": "RWLOCK_DEMO::Slide 1",
+      "steps": [
+        {
+          "action": "openSlide",
+          "path": "/.demo/slides/8_rwlock/slide1.md"
+        }
+      ]
+    },
+    {
+      "title": "RWLOCK_DEMO::Initialize package",
+      "steps": [
+        {
+          "action": "snippet",
+          "contentPath": "./snippets/create_package.json",
+          "args": {
+            "PACKAGE_NAME": "rwlock_demo",
+            "FOLDER_NAME": "8_rwlock_demo"
+          }
+        }
+      ]
+    },
+    {
+      "title": "RWLOCK_DEMO::Install tokio",
+      "steps": [
+        {
+          "action": "closeTerminal",
+          "terminalId": "create_package"
+        },
+        {
+          "action": "executeTerminalCommand",
+          "terminalId": "RWLOCK_DEMO",
+          "command": "cd src/examples/8_RWLOCK_DEMO && cargo add tokio --features full"
+        },
+        {
+          "action": "open",
+          "path": "/src/examples/8_RWLOCK_DEMO/Cargo.toml"
+        },
+        {
+          "action": "create",
+          "path": "/src/examples/8_rwlock_demo/src/main.rs",
+          "contentPath": "/snapshots/rwlock_demo.snapshot.rs"
+        }
+      ]
+    },
+    {
+      "title": "RWLOCK_DEMO::Open slide2",
+      "steps": [
+        {
+          "action": "openSlide",
+          "path": "/.demo/slides/8_rwlock/slide2.md"
+        }
+      ]
+    },
+    {
+      "title": "RWLOCK_DEMO::Write initial example code",
+      "steps": [
+        {
+          "action": "open",
+          "path": "/src/examples/8_rwlock_demo/src/main.rs"
+        },
+        {
+          "action": "applyPatch",
+          "path": "/src/examples/8_rwlock_demo/src/main.rs",
+          "contentPath": "/snapshots/rwlock_demo.snapshot.rs",
+          "patch": "/patches/rwlock_demo/step1.patch"
+        },
+        {
+          "action": "executeTerminalCommand",
+          "terminalId": "RWLOCK_DEMO",
+          "command": "clear && cargo run"
+        }
+      ]
+    },
+    {
+      "title": "RWLOCK_DEMO::Open slide3",
+      "steps": [
+        {
+          "action": "openSlide",
+          "path": "/.demo/slides/8_rwlock/slide3.md"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://demotime.elio.dev/demo-time.schema.json",
+  "title": "9.[DEMO] Oneshot Channels",
+  "description": "This demo explains how to use oneshot channels in Rust programming language.",
+  "demos": [
+    {
+      "title": "ONESHOT_CHANNELS::Slide 1",
+      "steps": [
+        {
+          "action": "openSlide",
+          "path": "/.demo/slides/9_oneshot_channels/slide1.md"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "$schema": "https://demotime.elio.dev/demo-time.schema.json",
+  "title": "9.[CONTENT] Channels",
+  "description": "This content explains how to use channels in Rust programming language.",
+  "demos": [
+    {
+      "title": "CHANNELS::Slide 1",
+      "steps": [
+        {
+          "action": "openSlide",
+          "path": "/.demo/slides/9_channels/slide1.md"
+        }
+      ]
+    },
+    {
+      "title": "CHANNELS::Slide 2",
+      "steps": [
+        {
+          "action": "openSlide",
+          "path": "/.demo/slides/9_channels/slide2.md"
+        }
+      ]
+    },
+    {
+      "title": "CHANNELS::Slide 3",
+      "steps": [
+        {
+          "action": "openSlide",
+          "path": "/.demo/slides/9_channels/slide3.md"
+        }
+      ]
+    }
+  ]
+}
