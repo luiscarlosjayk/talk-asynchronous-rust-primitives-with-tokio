@@ -13,6 +13,15 @@
       ]
     },
     {
+      "title": "BARRIER_DEMO::Slide 2",
+      "steps": [
+        {
+          "action": "openSlide",
+          "path": "/.demo/slides/7_barrier/slide2.md"
+        }
+      ]
+    },
+    {
       "title": "BARRIER_DEMO::Initialize package",
       "steps": [
         {
@@ -49,15 +58,6 @@
       ]
     },
     {
-      "title": "BARRIER_DEMO::Open slide2",
-      "steps": [
-        {
-          "action": "openSlide",
-          "path": "/.demo/slides/7_barrier/slide2.md"
-        }
-      ]
-    },
-    {
       "title": "BARRIER_DEMO::Write initial example code",
       "steps": [
         {
@@ -74,15 +74,6 @@
           "action": "executeTerminalCommand",
           "terminalId": "BARRIER_DEMO",
           "command": "clear && cargo run"
-        }
-      ]
-    },
-    {
-      "title": "BARRIER_DEMO::Open slide3",
-      "steps": [
-        {
-          "action": "openSlide",
-          "path": "/.demo/slides/7_barrier/slide3.md"
         }
       ]
     }

@@ -1,0 +1,77 @@
+Index: /src/examples/12_watch_channels_demo/src/main.rs
+===================================================================
+--- /src/examples/12_watch_channels_demo/src/main.rs
++++ /src/examples/12_watch_channels_demo/src/main.rs
+@@ -1,3 +1,70 @@
+-fn main() {
+-    println!("Hello, world!");
++use tokio::sync::watch;
++use tokio::time::{Duration, sleep};
++
++#[derive(Debug, Clone, PartialEq, Eq)]
++struct Config {
++    log_level: String,
++    feature_flags: Vec<String>,
++    port: u16,
+ }
++
++async fn start_api_service(config: Config) {
++    println!("[API Service] Listening on port {}", config.port);
++    // Here we could register services, middlewares, etc.
++}
++
++#[tokio::main]
++async fn main() {
++    let initial_config = Config {
++        log_level: "INFO".to_string(),
++        feature_flags: vec!["basic_auth".to_string()],
++        port: 8080,
++    };
++
++    let (tx, rx) = watch::channel(initial_config);
++
++    tokio::spawn(async move {
++        println!("[Config Watcher] Starting...");
++        sleep(Duration::from_secs(3)).await;
++        let new_config_1 = Config {
++            log_level: "DEBUG".to_string(),
++            feature_flags: vec!["basic_auth".to_string()],
++            port: 8080,
++        };
++        println!("[Config Watcher] ==> Sending new config: DEBUG level");
++        tx.send(new_config_1).unwrap();
++
++        sleep(Duration::from_secs(3)).await;
++        let new_config_2 = Config {
++            log_level: "DEBUG".to_string(),
++            feature_flags: vec!["basic_auth".to_string(), "new_api".to_string()],
++            port: 8081,
++        };
++        println!("[Config Watcher] ==> Sending new config: Enabled 'new_api' feature");
++        tx.send(new_config_2).unwrap();
++    });
++
++    let mut rx_logger = rx.clone();
++    let logger_service = tokio::spawn(async move {
++        while rx_logger.changed().await.is_ok() {
++            let current_config = rx_logger.borrow();
++            println!(
++                "[Logger Service] Detected config change! New log level is: {}",
++                current_config.log_level
++            );
++        }
++    });
++    let mut rx_api = rx.clone();
++    let api_service = tokio::spawn(async move {
++        while rx_api.changed().await.is_ok() {
++            let current_config = rx_api.borrow_and_update().clone();
++            println!(
++                "[API Service] Detected config change! Current features are: {:?}",
++                current_config.feature_flags
++            );
++            start_api_service(current_config).await;
++        }
++    });
++
++    let _ = tokio::try_join!(logger_service, api_service);
++}

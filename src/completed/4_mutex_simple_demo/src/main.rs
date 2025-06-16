@@ -1,0 +1,61 @@
+use std::sync::Arc;
+use tokio::{
+    select,
+    sync::Mutex,
+    time::{Duration, Instant, sleep},
+};
+
+async fn increment_counter_after_delay(counter: Arc<Mutex<i32>>, delay: Duration) {
+    let mut lock = counter.lock().await;
+    sleep(delay).await;
+    *lock += 1;
+    // lock is dropped here
+}
+
+async fn health_check() {
+    loop {
+        sleep(Duration::from_millis(500)).await;
+        println!("Health check");
+    }
+}
+
+#[tokio::main]
+async fn main() {
+    let start_time = Arc::new(Instant::now());
+    let counter = Arc::new(Mutex::new(0));
+
+    let task_1 = tokio::spawn({
+        let start_time = start_time.clone();
+        let counter = counter.clone();
+
+        async move {
+            println!("Starting task_1 at {}µs", start_time.elapsed().as_micros());
+            increment_counter_after_delay(counter, Duration::from_secs(2)).await;
+
+            println!("[task_1] Took {}ms", start_time.elapsed().as_millis());
+        }
+    });
+
+    let task_2 = tokio::spawn({
+        let start_time = start_time.clone();
+        let counter = counter.clone();
+        sleep(Duration::from_millis(1)).await;
+
+        async move {
+            println!("Starting task_2 at {}µs", start_time.elapsed().as_micros());
+
+            select!(
+                _ = health_check() => {},
+                _ = increment_counter_after_delay(counter, Duration::from_millis(200)) => {}
+            );
+
+            println!("[task_2] Took {}ms", start_time.elapsed().as_millis());
+        }
+    });
+
+    let _ = task_1.await;
+    let _ = task_2.await;
+
+    let lock = counter.lock().await;
+    println!("Final counter = {}", lock);
+}

@@ -1,0 +1,72 @@
+{
+    "$schema": "https://demotime.elio.dev/demo-time.schema.json",
+    "title": "14.[DEMO] OnceCell",
+    "description": "This demo explains how to use OnceCell in Rust programming language.",
+    "demos": [
+      {
+        "title": "ONCE_CELL::Slide 1",
+        "steps": [
+          {
+            "action": "openSlide",
+            "path": "/.demo/slides/14_once_cell/slide1.md"
+          }
+        ]
+      },
+      {
+        "title": "ONCE_CELL::Initialize package",
+        "steps": [
+          {
+            "action": "snippet",
+            "contentPath": "./snippets/create_package.json",
+            "args": {
+              "PACKAGE_NAME": "once_cell_demo",
+              "FOLDER_NAME": "14_once_cell_demo"
+            }
+          }
+        ]
+      },
+      {
+        "title": "ONCE_CELL::Install tokio",
+        "steps": [
+          {
+            "action": "closeTerminal",
+            "terminalId": "create_package"
+          },
+          {
+            "action": "executeTerminalCommand",
+            "terminalId": "ONCE_CELL",
+            "command": "cd src/examples/14_once_cell_demo && cargo add tokio --features full"
+          },
+          {
+            "action": "open",
+            "path": "/src/examples/14_once_cell_demo/Cargo.toml"
+          },
+          {
+            "action": "create",
+            "path": "/src/examples/14_once_cell_demo/src/main.rs",
+            "contentPath": "/snapshots/once_cell_demo.snapshot.rs"
+          }
+        ]
+      },
+      {
+        "title": "ONCE_CELL::Write initial example code",
+        "steps": [
+          {
+            "action": "open",
+            "path": "/src/examples/14_once_cell_demo/src/main.rs"
+          },
+          {
+            "action": "applyPatch",
+            "path": "/src/examples/14_once_cell_demo/src/main.rs",
+            "contentPath": "/snapshots/once_cell_demo.snapshot.rs",
+            "patch": "/patches/once_cell_demo/step1.patch"
+          },
+          {
+            "action": "executeTerminalCommand",
+            "terminalId": "ONCE_CELL",
+            "command": "clear && cargo run"
+          }
+        ]
+      }
+    ]
+  }

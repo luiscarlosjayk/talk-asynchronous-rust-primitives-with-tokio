@@ -1,0 +1,81 @@
+{
+    "$schema": "https://demotime.elio.dev/demo-time.schema.json",
+    "title": "10.[DEMO] MPSC Channels",
+    "description": "This demo explains how to use mpsc channels in Rust programming language.",
+    "demos": [
+      {
+        "title": "MPSC_CHANNELS::Slide 1",
+        "steps": [
+          {
+            "action": "openSlide",
+            "path": "/.demo/slides/11_mpsc_channels/slide1.md"
+          }
+        ]
+      },
+      {
+        "title": "MPSC_CHANNELS::Slide 2",
+        "steps": [
+          {
+            "action": "openSlide",
+            "path": "/.demo/slides/11_mpsc_channels/slide2.md"
+          }
+        ]
+      },
+      {
+        "title": "MPSC_CHANNELS::Initialize package",
+        "steps": [
+          {
+            "action": "snippet",
+            "contentPath": "./snippets/create_package.json",
+            "args": {
+              "PACKAGE_NAME": "mpsc_channels_demo",
+              "FOLDER_NAME": "11_mpsc_channels_demo"
+            }
+          }
+        ]
+      },
+      {
+        "title": "MPSC_CHANNELS::Install tokio",
+        "steps": [
+          {
+            "action": "closeTerminal",
+            "terminalId": "create_package"
+          },
+          {
+            "action": "executeTerminalCommand",
+            "terminalId": "MPSC_CHANNELS",
+            "command": "cd src/examples/11_mpsc_channels_demo && cargo add tokio --features full"
+          },
+          {
+            "action": "open",
+            "path": "/src/examples/11_mpsc_channels_demo/Cargo.toml"
+          },
+          {
+            "action": "create",
+            "path": "/src/examples/11_mpsc_channels_demo/src/main.rs",
+            "contentPath": "/snapshots/mpsc_channels_demo.snapshot.rs"
+          }
+        ]
+      },
+      {
+        "title": "MPSC_CHANNELS::Write initial example code",
+        "steps": [
+          {
+            "action": "open",
+            "path": "/src/examples/11_mpsc_channels_demo/src/main.rs"
+          },
+          {
+            "action": "applyPatch",
+            "path": "/src/examples/11_mpsc_channels_demo/src/main.rs",
+            "contentPath": "/snapshots/mpsc_channels_demo.snapshot.rs",
+            "patch": "/patches/mpsc_channels_demo/step1.patch"
+          },
+          {
+            "action": "executeTerminalCommand",
+            "terminalId": "MPSC_CHANNELS",
+            "command": "clear && cargo run"
+          }
+        ]
+      }
+    ]
+  }

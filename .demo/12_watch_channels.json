@@ -1,0 +1,90 @@
+{
+    "$schema": "https://demotime.elio.dev/demo-time.schema.json",
+    "title": "11.[DEMO] Watch Channels",
+    "description": "This demo explains how to use watch channels in Rust programming language.",
+    "demos": [
+      {
+        "title": "WATCH_CHANNELS::Slide 1",
+        "steps": [
+          {
+            "action": "openSlide",
+            "path": "/.demo/slides/12_watch_channels/slide1.md"
+          }
+        ]
+      },
+      {
+        "title": "WATCH_CHANNELS::Slide 2",
+        "steps": [
+          {
+            "action": "openSlide",
+            "path": "/.demo/slides/12_watch_channels/slide2.md"
+          }
+        ]
+      },
+      {
+        "title": "WATCH_CHANNELS::Slide 3",
+        "steps": [
+          {
+            "action": "markdownPreview",
+            "path": "/.demo/slides/12_watch_channels/slide3.md"
+          }
+        ]
+      },
+      {
+        "title": "WATCH_CHANNELS::Initialize package",
+        "steps": [
+          {
+            "action": "snippet",
+            "contentPath": "./snippets/create_package.json",
+            "args": {
+              "PACKAGE_NAME": "watch_channels_demo",
+              "FOLDER_NAME": "12_watch_channels_demo"
+            }
+          }
+        ]
+      },
+      {
+        "title": "WATCH_CHANNELS::Install tokio",
+        "steps": [
+          {
+            "action": "closeTerminal",
+            "terminalId": "create_package"
+          },
+          {
+            "action": "executeTerminalCommand",
+            "terminalId": "WATCH_CHANNELS",
+            "command": "cd src/examples/12_watch_channels_demo && cargo add tokio --features full"
+          },
+          {
+            "action": "open",
+            "path": "/src/examples/12_watch_channels_demo/Cargo.toml"
+          },
+          {
+            "action": "create",
+            "path": "/src/examples/12_watch_channels_demo/src/main.rs",
+            "contentPath": "/snapshots/watch_channels_demo.snapshot.rs"
+          }
+        ]
+      },
+      {
+        "title": "WATCH_CHANNELS::Write initial example code",
+        "steps": [
+          {
+            "action": "open",
+            "path": "/src/examples/12_watch_channels_demo/src/main.rs"
+          },
+          {
+            "action": "applyPatch",
+            "path": "/src/examples/12_watch_channels_demo/src/main.rs",
+            "contentPath": "/snapshots/watch_channels_demo.snapshot.rs",
+            "patch": "/patches/watch_channels_demo/step1.patch"
+          },
+          {
+            "action": "executeTerminalCommand",
+            "terminalId": "WATCH_CHANNELS",
+            "command": "clear && cargo run"
+          }
+        ]
+      }
+    ]
+  }

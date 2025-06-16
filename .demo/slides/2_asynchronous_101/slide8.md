@@ -2,7 +2,7 @@
 
 Multiple tasks on same thread -> need to be managed
 
-Tasks careated and managed by and async runtime
+Tasks created and managed by an async runtime
 
 When thread is active, async runtime decides which task is executed within it
 

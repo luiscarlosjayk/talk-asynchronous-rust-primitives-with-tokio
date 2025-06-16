@@ -4,6 +4,7 @@
 # Rust
 Cargo.lock
 target/
+rust-ice*
 
 # Examples
 src/examples/1_tokio_setup/

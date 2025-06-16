@@ -2,14 +2,29 @@ Index: /src/examples/4_mutex_demo/src/main.rs
 ===================================================================
 --- /src/examples/4_mutex_demo/src/main.rs
 +++ /src/examples/4_mutex_demo/src/main.rs
-@@ -1,3 +1,43 @@
+@@ -1,3 +1,61 @@
 -fn main() {
 -    println!("Hello, world!");
 +use std::sync::Arc;
 +use tokio::{
++    select,
 +    sync::Mutex,
 +    time::{Duration, Instant, sleep},
 +};
++
++async fn increment_counter_after_delay(counter: Arc<Mutex<i32>>, delay: Duration) {
++    let mut lock = counter.lock().await;
++    sleep(delay).await;
++    *lock += 1;
++    // lock is dropped here
+ }
++
++async fn health_check() {
++    loop {
++        sleep(Duration::from_millis(500)).await;
++        println!("Health check");
++    }
++}
 +
 +#[tokio::main]
 +async fn main() {
@@ -22,9 +37,8 @@ Index: /src/examples/4_mutex_demo/src/main.rs
 +
 +        async move {
 +            println!("Starting task_1 at {}µs", start_time.elapsed().as_micros());
-+            sleep(Duration::from_millis(400)).await;
-+            let mut lock = counter.lock().await;
-+            *lock += 1;
++            increment_counter_after_delay(counter, Duration::from_secs(2)).await;
++
 +            println!("[task_1] Took {}ms", start_time.elapsed().as_millis());
 +        }
 +    });
@@ -32,12 +46,16 @@ Index: /src/examples/4_mutex_demo/src/main.rs
 +    let task_2 = tokio::spawn({
 +        let start_time = start_time.clone();
 +        let counter = counter.clone();
++        sleep(Duration::from_millis(1)).await;
 +
 +        async move {
 +            println!("Starting task_2 at {}µs", start_time.elapsed().as_micros());
-+            sleep(Duration::from_millis(100)).await;
-+            let mut lock = counter.lock().await;
-+            *lock += 1;
++
++            select!(
++                _ = health_check() => {},
++                _ = increment_counter_after_delay(counter, Duration::from_millis(200)) => {}
++            );
++
 +            println!("[task_2] Took {}ms", start_time.elapsed().as_millis());
 +        }
 +    });
@@ -46,5 +64,5 @@ Index: /src/examples/4_mutex_demo/src/main.rs
 +    let _ = task_2.await;
 +
 +    let lock = counter.lock().await;
-+    println!("Counter = {}", lock);
- }
++    println!("Final counter = {}", lock);
++}

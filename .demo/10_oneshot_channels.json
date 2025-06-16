@@ -1,0 +1,72 @@
+{
+  "$schema": "https://demotime.elio.dev/demo-time.schema.json",
+  "title": "9.[DEMO] Oneshot Channels",
+  "description": "This demo explains how to use oneshot channels in Rust programming language.",
+  "demos": [
+    {
+      "title": "ONESHOT_CHANNELS::Slide 1",
+      "steps": [
+        {
+          "action": "openSlide",
+          "path": "/.demo/slides/10_oneshot_channels/slide1.md"
+        }
+      ]
+    },
+    {
+      "title": "ONESHOT_CHANNELS::Initialize package",
+      "steps": [
+        {
+          "action": "snippet",
+          "contentPath": "./snippets/create_package.json",
+          "args": {
+            "PACKAGE_NAME": "oneshot_channels_demo",
+            "FOLDER_NAME": "10_oneshot_channels_demo"
+          }
+        }
+      ]
+    },
+    {
+      "title": "ONESHOT_CHANNELS::Install tokio",
+      "steps": [
+        {
+          "action": "closeTerminal",
+          "terminalId": "create_package"
+        },
+        {
+          "action": "executeTerminalCommand",
+          "terminalId": "ONESHOT_CHANNELS",
+          "command": "cd src/examples/10_oneshot_channels_demo && cargo add tokio --features full"
+        },
+        {
+          "action": "open",
+          "path": "/src/examples/10_oneshot_channels_demo/Cargo.toml"
+        },
+        {
+          "action": "create",
+          "path": "/src/examples/10_oneshot_channels_demo/src/main.rs",
+          "contentPath": "/snapshots/oneshot_channels_demo.snapshot.rs"
+        }
+      ]
+    },
+    {
+      "title": "ONESHOT_CHANNELS::Write initial example code",
+      "steps": [
+        {
+          "action": "open",
+          "path": "/src/examples/10_oneshot_channels_demo/src/main.rs"
+        },
+        {
+          "action": "applyPatch",
+          "path": "/src/examples/10_oneshot_channels_demo/src/main.rs",
+          "contentPath": "/snapshots/oneshot_channels_demo.snapshot.rs",
+          "patch": "/patches/oneshot_channels_demo/step1.patch"
+        },
+        {
+          "action": "executeTerminalCommand",
+          "terminalId": "ONESHOT_CHANNELS",
+          "command": "clear && cargo run"
+        }
+      ]
+    }
+  ]
+}

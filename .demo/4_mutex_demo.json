@@ -13,6 +13,33 @@
       ]
     },
     {
+      "title": "MUTEX_DEMO::Open slide2",
+      "steps": [
+        {
+          "action": "openSlide",
+          "path": "/.demo/slides/4_mutex/slide2.md"
+        }
+      ]
+    },
+    {
+      "title": "MUTEX_DEMO::Open slide3",
+      "steps": [
+        {
+          "action": "openSlide",
+          "path": "/.demo/slides/4_mutex/slide3.md"
+        }
+      ]
+    },
+    {
+      "title": "MUTEX_DEMO::Open slide4",
+      "steps": [
+        {
+          "action": "openSlide",
+          "path": "/.demo/slides/4_mutex/slide4.md"
+        }
+      ]
+    },
+    {
       "title": "MUTEX_DEMO::Initialize package",
       "steps": [
         {
@@ -49,16 +76,7 @@
       ]
     },
     {
-      "title": "MUTEX_DEMO::Open slide2",
-      "steps": [
-        {
-          "action": "openSlide",
-          "path": "/.demo/slides/4_mutex/slide2.md"
-        }
-      ]
-    },
-    {
-      "title": "MUTEX_DEMO::Write initial example code",
+      "title": "MUTEX_DEMO::Write initial  simple example code",
       "steps": [
         {
           "action": "open",
@@ -78,23 +96,18 @@
       ]
     },
     {
-      "title": "MUTEX_DEMO::Interchange first sleep and lock",
+      "title": "MUTEX_DEMO::Replace code with next mutex example",
       "steps": [
+        {
+          "action": "open",
+          "path": "/src/examples/4_mutex_demo/src/main.rs"
+        },
         {
           "action": "applyPatch",
           "path": "/src/examples/4_mutex_demo/src/main.rs",
           "contentPath": "/snapshots/mutex_demo.snapshot.rs",
           "patch": "/patches/mutex_demo/step2.patch"
         },
-        {
-          "action": "open",
-          "path": "/src/examples/4_mutex_demo/src/main.rs"
-        }
-      ]
-    },
-    {
-      "title": "MUTEX_DEMO::Run the code",
-      "steps": [
         {
           "action": "executeTerminalCommand",
           "terminalId": "mutex_demo",
@@ -103,7 +116,7 @@
       ]
     },
     {
-      "title": "MUTEX_DEMO::Interchange second sleep and lock",
+      "title": "MUTEX_DEMO::Interchange first sleep and lock",
       "steps": [
         {
           "action": "applyPatch",
@@ -128,42 +141,13 @@
       ]
     },
     {
-      "title": "MUTEX_DEMO::Adds file write",
+      "title": "MUTEX_DEMO::Interchange second sleep and lock",
       "steps": [
         {
           "action": "applyPatch",
           "path": "/src/examples/4_mutex_demo/src/main.rs",
           "contentPath": "/snapshots/mutex_demo.snapshot.rs",
           "patch": "/patches/mutex_demo/step4.patch"
-        },
-        {
-          "action": "open",
-          "path": "/src/examples/4_mutex_demo/src/main.rs"
-        },
-        {
-          "action": "executeTerminalCommand",
-          "terminalId": "mutex_demo",
-          "command": "clear && cargo run"
-        }
-      ]
-    },
-    {
-      "title": "MUTEX_DEMO::Open foo.txt",
-      "steps": [
-        {
-          "action": "open",
-          "path": "/src/examples/4_mutex_demo/foo.txt"
-        }
-      ]
-    },
-    {
-      "title": "MUTEX_DEMO::Causes deadlock example",
-      "steps": [
-        {
-          "action": "applyPatch",
-          "path": "/src/examples/4_mutex_demo/src/main.rs",
-          "contentPath": "/snapshots/mutex_demo.snapshot.rs",
-          "patch": "/patches/mutex_demo/step5.patch"
         },
         {
           "action": "open",
@@ -178,10 +162,26 @@
           "action": "executeTerminalCommand",
           "terminalId": "mutex_demo",
           "command": "clear && cargo run"
+        }
+      ]
+    },
+    {
+      "title": "MUTEX_DEMO::Adds file write example",
+      "steps": [
+        {
+          "action": "applyPatch",
+          "path": "/src/examples/4_mutex_demo/src/main.rs",
+          "contentPath": "/snapshots/mutex_demo.snapshot.rs",
+          "patch": "/patches/mutex_demo/step5.patch"
         },
         {
-          "action": "showInfoMessage",
-          "message": "Press Ctrl+C in terminal to stop the deadlock"
+          "action": "open",
+          "path": "/src/examples/4_mutex_demo/src/main.rs"
+        },
+        {
+          "action": "executeTerminalCommand",
+          "terminalId": "mutex_demo",
+          "command": "clear && cargo run"
         }
       ]
     },
@@ -193,55 +193,6 @@
           "path": "/src/examples/4_mutex_demo/src/main.rs",
           "contentPath": "/snapshots/mutex_demo.snapshot.rs",
           "patch": "/patches/mutex_demo/step6.patch"
-        },
-        {
-          "action": "open",
-          "path": "/src/examples/4_mutex_demo/src/main.rs"
-        },
-        {
-          "action": "executeTerminalCommand",
-          "terminalId": "mutex_demo",
-          "command": "clear && cargo run"
-        }
-      ]
-    },
-    {
-      "title": "MUTEX_DEMO::Open slide3",
-      "steps": [
-        {
-          "action": "openSlide",
-          "path": "/.demo/slides/4_mutex/slide3.md"
-        }
-      ]
-    },
-    {
-      "title": "MUTEX_DEMO::Use a channel to manage log messages",
-      "steps": [
-        {
-          "action": "applyPatch",
-          "path": "/src/examples/4_mutex_demo/src/main.rs",
-          "contentPath": "/snapshots/mutex_demo.snapshot.rs",
-          "patch": "/patches/mutex_demo/step7.patch"
-        },
-        {
-          "action": "open",
-          "path": "/src/examples/4_mutex_demo/src/main.rs"
-        },
-        {
-          "action": "executeTerminalCommand",
-          "terminalId": "mutex_demo",
-          "command": "clear && cargo run"
-        }
-      ]
-    },
-    {
-      "title": "MUTEX_DEMO::Showcases adding synchronous work",
-      "steps": [
-        {
-          "action": "applyPatch",
-          "path": "/src/examples/4_mutex_demo/src/main.rs",
-          "contentPath": "/snapshots/mutex_demo.snapshot.rs",
-          "patch": "/patches/mutex_demo/step8.patch"
         },
         {
           "action": "open",

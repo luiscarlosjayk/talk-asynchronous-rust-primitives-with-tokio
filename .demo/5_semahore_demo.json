@@ -8,7 +8,25 @@
       "steps": [
         {
           "action": "openSlide",
-          "path": "/.demo/slides/4_mutex/slide1.md"
+          "path": "/.demo/slides/5_semaphore/slide1.md"
+        }
+      ]
+    },
+    {
+      "title": "SEMAPHORE_DEMO::Open slide2",
+      "steps": [
+        {
+          "action": "openSlide",
+          "path": "/.demo/slides/5_semaphore/slide2.md"
+        }
+      ]
+    },
+    {
+      "title": "SEMAPHORE_DEMO::Open slide3",
+      "steps": [
+        {
+          "action": "markdownPreview",
+          "path": "/.demo/slides/5_semaphore/slide3.md"
         }
       ]
     },
@@ -45,15 +63,6 @@
           "action": "create",
           "path": "/src/examples/5_semaphore_demo/src/main.rs",
           "contentPath": "/snapshots/semaphore_demo.snapshot.rs"
-        }
-      ]
-    },
-    {
-      "title": "SEMAPHORE_DEMO::Open slide2",
-      "steps": [
-        {
-          "action": "openSlide",
-          "path": "/.demo/slides/5_semaphore/slide2.md"
         }
       ]
     },

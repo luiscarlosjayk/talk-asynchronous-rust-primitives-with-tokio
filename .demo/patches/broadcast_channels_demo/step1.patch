@@ -1,0 +1,69 @@
+Index: /src/examples/13_broadcast_channels_demo/src/main.rs
+===================================================================
+--- /src/examples/13_broadcast_channels_demo/src/main.rs
++++ /src/examples/13_broadcast_channels_demo/src/main.rs
+@@ -1,3 +1,62 @@
+-fn main() {
+-    println!("Hello, world!");
++use tokio::sync::broadcast;
++use tokio::time::{Duration, sleep};
++
++/*
++ * This example shows how to use a broadcast channel to send messages to multiple consumers.
++ * We will simulate two users connected to a chat room.
++ * And one of the users has a slow connection, so we will see how the messages are buffered.
++ */
++
++#[tokio::main]
++async fn main() {
++    let (tx, _rx) = broadcast::channel(16);
++
++    let mut rx1 = tx.subscribe();
++    let tx1 = tx.clone();
++
++    let user1_handle = tokio::spawn(async move {
++        tx1.send("[User 1]: Hello everyone!".to_string()).unwrap();
++        sleep(Duration::from_secs(2)).await;
++        tx1.send("[User 1]: How is it going?".to_string()).unwrap();
++    });
++
++    let mut rx2 = tx.subscribe();
++    let tx2 = tx.clone();
++
++    let user2_handle = tokio::spawn(async move {
++        sleep(Duration::from_secs(1)).await;
++        tx2.send("[User 2]: Hey! I'm here.".to_string()).unwrap();
++    });
++
++    let _receiver1_handle = tokio::spawn(async move {
++        loop {
++            match rx1.recv().await {
++                Ok(msg) => println!("[User 1's Screen] Received: {}", msg),
++                Err(broadcast::error::RecvError::Lagged(n)) => {
++                    eprintln!("[User 1's Screen] Lagged! Missed {} messages.", n);
++                }
++                Err(_) => break, // Channel closed
++            }
++        }
++    });
++
++    let _receiver2_handle = tokio::spawn(async move {
++        loop {
++            sleep(Duration::from_secs(2)).await;
++
++            match rx2.recv().await {
++                Ok(msg) => println!("[User 2's Screen] Received: {}", msg),
++                Err(broadcast::error::RecvError::Lagged(n)) => {
++                    eprintln!("[User 2's Screen] Lagged! Missed {} messages.", n);
++                }
++                Err(_) => break, // Channel closed
++            }
++        }
++    });
++
++    let _ = tokio::try_join!(user1_handle, user2_handle);
++
++    sleep(Duration::from_secs(4)).await;
++
++    println!("[Main] Demo finished.");
+ }

@@ -1,0 +1,46 @@
+Index: /src/examples/10_oneshot_channels_demo/src/main.rs
+===================================================================
+--- /src/examples/10_oneshot_channels_demo/src/main.rs
++++ /src/examples/10_oneshot_channels_demo/src/main.rs
+@@ -1,3 +1,39 @@
+-fn main() {
+-    println!("Hello, world!");
++#[tokio::main]
++async fn main() {
++    let (tx1, rx1) = tokio::sync::oneshot::channel();
++    let (tx2, rx2) = tokio::sync::oneshot::channel();
++
++    tokio::spawn(async move {
++        let mut data1 = std::collections::HashMap::new();
++        data1.insert("info1", "value1");
++
++        if tx1.send(data1).is_err() {
++            println!("the receiver dropped");
++        }
++    });
++
++    tokio::spawn(async move {
++        let mut data2 = std::collections::HashMap::new();
++        data2.insert("info2", "value2");
++
++        if tx2.send(data2).is_err() {
++            println!("the receiver dropped");
++        }
++    });
++
++    /*
++     * Now we can wait for both messages but we shall fail
++     * at first channel that errors because we're interested
++     * in both messages or none.
++     */
++    match tokio::try_join!(rx1, rx2) {
++        Ok((res1, res2)) => {
++            println!("data1 = {:?}", res1);
++            println!("data2 = {:?}", res2);
++        }
++        Err(e) => {
++            eprintln!("Failed to receive from a channel: {}", e);
++            eprintln!("This happens when a sender is dropped before a value is sent.");
++        }
++    }
+ }

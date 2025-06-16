@@ -13,6 +13,24 @@
       ]
     },
     {
+      "title": "RWLOCK_DEMO::Open slide2",
+      "steps": [
+        {
+          "action": "openSlide",
+          "path": "/.demo/slides/8_rwlock/slide2.md"
+        }
+      ]
+    },
+    {
+      "title": "RWLOCK_DEMO::Open slide3",
+      "steps": [
+        {
+          "action": "markdownPreview",
+          "path": "/.demo/slides/8_rwlock/slide3.md"
+        }
+      ]
+    },
+    {
       "title": "RWLOCK_DEMO::Initialize package",
       "steps": [
         {
@@ -49,15 +67,6 @@
       ]
     },
     {
-      "title": "RWLOCK_DEMO::Open slide2",
-      "steps": [
-        {
-          "action": "openSlide",
-          "path": "/.demo/slides/8_rwlock/slide2.md"
-        }
-      ]
-    },
-    {
       "title": "RWLOCK_DEMO::Write initial example code",
       "steps": [
         {
@@ -74,15 +83,6 @@
           "action": "executeTerminalCommand",
           "terminalId": "RWLOCK_DEMO",
           "command": "clear && cargo run"
-        }
-      ]
-    },
-    {
-      "title": "RWLOCK_DEMO::Open slide3",
-      "steps": [
-        {
-          "action": "openSlide",
-          "path": "/.demo/slides/8_rwlock/slide3.md"
         }
       ]
     }

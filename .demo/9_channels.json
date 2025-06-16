@@ -20,15 +20,6 @@
           "path": "/.demo/slides/9_channels/slide2.md"
         }
       ]
-    },
-    {
-      "title": "CHANNELS::Slide 3",
-      "steps": [
-        {
-          "action": "openSlide",
-          "path": "/.demo/slides/9_channels/slide3.md"
-        }
-      ]
     }
   ]
 }

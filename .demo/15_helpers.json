@@ -1,0 +1,26 @@
+{
+    "$schema": "https://demotime.elio.dev/demo-time.schema.json",
+    "title": "13. [HELPERS] Tools",
+    "description": "This contains some helpers for the demo.",
+    "demos": [
+      {
+        "title": "Delete examples",
+        "steps": [
+          {
+            "action": "executeTerminalCommand",
+            "command": "rm -rf src/examples/*",
+            "terminalId": "tools"
+          }
+        ]
+      },
+      {
+        "title": "Outro",
+        "steps": [
+          {
+            "action": "openSlide",
+            "path": "/.demo/slides/14_outro/slide1.md"
+          }
+        ]
+      }
+    ]
+}
