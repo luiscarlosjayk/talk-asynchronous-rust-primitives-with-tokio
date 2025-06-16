@@ -1,6 +1,6 @@
 {
     "$schema": "https://demotime.elio.dev/demo-time.schema.json",
-    "title": "12.[DEMO] Broadcast Channels",
+    "title": "13.[DEMO] Broadcast Channels",
     "description": "This demo explains how to use broadcast channels in Rust programming language.",
     "demos": [
       {

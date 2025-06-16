@@ -1,6 +1,6 @@
 {
     "$schema": "https://demotime.elio.dev/demo-time.schema.json",
-    "title": "11.[DEMO] Watch Channels",
+    "title": "12.[DEMO] Watch Channels",
     "description": "This demo explains how to use watch channels in Rust programming language.",
     "demos": [
       {

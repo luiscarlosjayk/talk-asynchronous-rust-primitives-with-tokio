@@ -1,6 +1,6 @@
 {
     "$schema": "https://demotime.elio.dev/demo-time.schema.json",
-    "title": "10.[DEMO] MPSC Channels",
+    "title": "11.[DEMO] MPSC Channels",
     "description": "This demo explains how to use mpsc channels in Rust programming language.",
     "demos": [
       {
